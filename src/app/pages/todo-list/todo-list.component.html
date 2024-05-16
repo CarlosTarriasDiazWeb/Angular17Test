@@ -1,0 +1,10 @@
+<ul>
+  @for (todo of todos; track todo.id) {
+  <li>
+    <article>
+      <h2>{{ todo.title }}</h2>
+      <h2>{{ todo.completed }}</h2>
+    </article>
+  </li>
+  }
+</ul>
