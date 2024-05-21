@@ -7,10 +7,12 @@ import { TodosService } from '../../core/services/todos/todos.service';
 import { Todo } from '../../core/models/todos';
 import { Subject, takeUntil } from 'rxjs';
 
+import { CustomButtomComponent } from '../../shared/components/custom-buttom/custom-buttom.component';
+
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [],
+  imports: [CustomButtomComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
 })
@@ -67,5 +69,9 @@ export class TodoListComponent {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  public showAlert() {
+    alert('Hola Buenas!');
   }
 }

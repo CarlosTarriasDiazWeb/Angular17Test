@@ -1,0 +1,13 @@
+@if(type === 'material') {
+<button mat-stroked-button color="primary" (click)="handleClick.emit()">
+  <ng-content></ng-content>
+</button>
+} @else if(type === 'prime') {
+
+<p-button
+  label="Check"
+  icon="pi pi-check"
+  (click)="handleClick.emit()"
+></p-button>
+
+}
