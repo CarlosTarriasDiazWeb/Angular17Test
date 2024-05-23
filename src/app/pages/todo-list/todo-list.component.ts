@@ -1,7 +1,16 @@
-import { Component, OnDestroy, OnInit, Pipe, inject } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  Pipe,
+  inject,
+  signal,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { ThemePalette } from '@angular/material/core';
 import { TodosService } from '../../core/services/todos/todos.service';
 import { Todo } from '../../core/models/todos';
@@ -12,7 +21,7 @@ import { CustomButtomComponent } from '../../shared/components/custom-buttom/cus
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CustomButtomComponent],
+  imports: [CustomButtomComponent, MatPaginatorModule],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
 })
@@ -26,7 +35,8 @@ export class TodoListComponent {
 
   private destroy$ = new Subject<void>();
 
-  todos: Todo[] = [];
+  todos = signal<Todo[]>([]);
+  limit = signal<number>(10);
 
   constructor(private todosService: TodosService) {}
 
@@ -50,7 +60,7 @@ export class TodoListComponent {
 
     this.todosService.todos$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (data: Todo[]) => {
-        this.todos = data;
+        this.todos.set(data);
       },
       error: (err) => {
         // Maneja el error aquí
@@ -63,7 +73,15 @@ export class TodoListComponent {
     });
 
     // Llamar a getAll para inicializar los todos
-    this.todosService.getAll().subscribe();
+
+    this.todosService.getAll(this.limit()).subscribe();
+  }
+
+  fetchData(event: any) {
+    const selectedLimit = event.pageSize;
+    this.limit.set(event.pageSize);
+    // Llamar a getAll para inicializar los todos
+    this.todosService.getAll(this.limit()).subscribe();
   }
 
   ngOnDestroy(): void {

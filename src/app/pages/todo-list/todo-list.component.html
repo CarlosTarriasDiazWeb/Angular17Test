@@ -1,5 +1,14 @@
+<mat-paginator
+  (page)="fetchData($event)"
+  [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+>
+</mat-paginator>
+
 <ul>
-  @for (todo of todos; track todo.id) {
+  @for (todo of todos(); track todo.id) {
   <li>
     <article>
       <h2>{{ todo.title }}</h2>
@@ -8,10 +17,10 @@
   </li>
   }
 
-  <app-custom-buttom type="material" (handleClick)="showAlert()">
+  <!-- <app-custom-buttom type="material" (handleClick)="showAlert()">
     <p>Púlsame!</p>
   </app-custom-buttom>
   <app-custom-buttom type="prime" (handleClick)="showAlert()">
     <p>Púlsame!</p>
-  </app-custom-buttom>
+  </app-custom-buttom> -->
 </ul>

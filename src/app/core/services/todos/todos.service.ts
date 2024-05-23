@@ -13,9 +13,9 @@ export class TodosService {
 
   todos$ = this.todosSubject.asObservable();
 
-  getAll(): Observable<Todo[]> {
+  getAll(limit: number): Observable<Todo[]> {
     return this.fetchService
-      .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
+      .get<Todo[]>(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`)
       .pipe(tap((todos) => this.todosSubject.next(todos)));
   }
 }
