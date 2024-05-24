@@ -7,4 +7,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/todo-list/todo-list.routes').then((m) => m.TODO_ROUTES),
   },
+  {
+    path: 'pokedex',
+    loadChildren: () =>
+      import('./pages/pokedex/pokedex.routes').then((m) => m.POKEDEX_ROUTES),
+  },
 ];

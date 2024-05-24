@@ -1,0 +1,23 @@
+<main class="d-flex w-100 flex-column">
+  <section class="d-flex align-items-center justify-content-center">
+    <form [formGroup]="myForm" (ngSubmit)="fetchPokemon()">
+      <mat-form-field>
+        <mat-label>Pokemon name</mat-label>
+        <input matInput placeholder="Pikachu" formControlName="name" />
+      </mat-form-field>
+      <div>
+        <button type="submit" mat-flat-button color="primary">Basic</button>
+      </div>
+    </form>
+  </section>
+
+  @if(pokemon()) {
+  <section>
+    <img
+      [src]="pokemon()?.sprites?.front_default"
+      alt="Default pokemon image"
+    />
+    {{ pokemon()?.sprites | json }}
+  </section>
+  }
+</main>
