@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Pokemon } from '../../core/models/pokemon';
 import { PokedexService } from '../../core/services/pokedex/pokedex.service';
 import { first } from 'rxjs';
+import { SearchInputComponent } from "../../shared/components/search-input/search-input.component";
 @Component({
   selector: 'app-pokedex',
   standalone: true,
@@ -19,7 +20,8 @@ import { first } from 'rxjs';
     CommonModule,
     MatInputModule,
     MatButton,
-  ],
+    SearchInputComponent
+],
   templateUrl: './pokedex.component.html',
   styleUrl: './pokedex.component.scss',
 })
